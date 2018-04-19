@@ -1,0 +1,62 @@
+@defaultColor: #fff;
+@headBgColor: aqua;
+@buttonColor: gold;
+
+@width: window.screen.width/10;
+
+.fs(@px) {
+  font-size: unit(@px / @width, rem);
+}
+
+.w(@px) {
+  width: unit(@px / @width, rem);
+}
+
+.h(@px) {
+  height: unit(@px /@width, rem);
+}
+
+.lh(@px) {
+  line-height: unit(@px /@width, rem);
+}
+
+.mt(@px) {
+  margin-top: unit(@px /@width, rem);
+}
+
+.mr(@px) {
+  margin-right: unit(@px /@width, rem);
+}
+
+.mb(@px) {
+  margin-bottom: unit(@px /@width, rem);
+}
+
+.ml(@px) {
+  margin-left: unit(@px /@width, rem);
+}
+
+.pt(@px) {
+  margin-top: unit(@px /@width, rem);
+}
+
+.pr(@px) {
+  padding-right: unit(@px /@width, rem);
+}
+
+.pb(@px) {
+  padding-bottom: unit(@px /@width, rem);
+}
+
+.pl(@px) {
+  padding-left: unit(@px /@width, rem);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  .fs(16px);
+}
