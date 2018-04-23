@@ -36,8 +36,51 @@ angular.module('app').config(['$stateProvider','$urlRouterProvider',function($st
 
 'use strict';
 
-angular.module('app').controller('mainCtrl',['$scope',function ($scope) {
-    
+angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
+    //$scope用来双向绑定
+    $scope.list1 = [{
+        id: '1',
+        name: 'web前端',
+        imgSrc: '/image/baidu.png',
+        companyName: '百度',
+        city: '北京',
+        industry: '互联网',
+        time: '2018-4-23 9:00'
+    },{
+        id: '2',
+        name: 'web前端',
+        imgSrc: '/image/ali.png',
+        companyName: '阿里云',
+        city: '杭州',
+        industry: '互联网',
+        time: '2018-4-20 9:00'
+    }];
+    $scope.list2 = [{
+        id: '1',
+        name: 'web前端',
+        imgSrc: '/image/baidu.png',
+        companyName: '百度',
+        city: '北京',
+        industry: '互联网',
+        time: '2018-4-23 9:00'
+    },{
+        id: '2',
+        name: 'web前端',
+        imgSrc: '/image/ali.png',
+        companyName: '阿里云',
+        city: '杭州',
+        industry: '互联网',
+        time: '2018-4-20 9:00'
+    }];
+}]);
+'use strict';
+//解析foot.html
+angular.module('app').directive('appFoot', [function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        templateUrl: '/view/template/foot.html'
+    }
 }]);
 'use strict';
 //html无法解析- 会被解析成大写
@@ -49,5 +92,18 @@ angular.module('app').directive('appHead', [function () {
         replace: true,
         //模板的位置
         templateUrl: 'view/template/head.html'
+    };
+}]);
+'use strict';
+
+angular.module('app').directive('appPositionList', [function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        templateUrl: 'view/template/positionList.html',
+        scope:{
+            //data的scope共享
+            data:'='
+        }
     };
 }]);

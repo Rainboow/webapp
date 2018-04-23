@@ -1,0 +1,42 @@
+.foot {
+  height: 40px;
+  line-height: 40px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 0;
+  border-top: 1px solid @bottomBorder;
+  li {
+    font-size: 19px;
+    .dib();
+    width: 33%;
+    color: @bottomColor;
+    .te-c();
+    .ve-m();
+    &.select {
+      background: @highBgColor;
+      color: @highColor;
+    }
+    i {
+      .dib();
+      .ve-m();
+      margin-right: 3px;
+      width: 22px;
+      height: 22px;
+    }
+    span {
+      .ve-m();
+    }
+  }
+  .icon-form {
+    background-image: url("../image/form.png");
+  }
+  .icon-search {
+    background-image: url("../image/search.png");
+
+  }
+  .icon-account {
+    background-image: url("../image/account.png");
+  }
+}

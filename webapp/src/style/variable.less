@@ -1,55 +1,58 @@
 @defaultColor: #fff;
 @headBgColor: aqua;
 @buttonColor: gold;
-
-@width: window.screen.width/10;
+@bottomColor: #9f9d9e;
+@bottomBorder: #d4d4d4;
+@highBgColor: #dbf9f4;
+@highColor: #01c2a3;
+@positionBorder: #f2f2f2;
 
 .fs(@px) {
-  font-size: unit(@px / @width, rem);
+  font-size: unit(@px / 37.5, rem);
 }
 
 .w(@px) {
-  width: unit(@px / @width, rem);
+  width: unit(@px / 37.5, rem);
 }
 
 .h(@px) {
-  height: unit(@px /@width, rem);
+  height: unit(@px /37.5, rem);
 }
 
 .lh(@px) {
-  line-height: unit(@px /@width, rem);
+  line-height: unit(@px /37.5, rem);
 }
 
 .mt(@px) {
-  margin-top: unit(@px /@width, rem);
+  margin-top: unit(@px /37.5, rem);
 }
 
 .mr(@px) {
-  margin-right: unit(@px /@width, rem);
+  margin-right: unit(@px /37.5, rem);
 }
 
 .mb(@px) {
-  margin-bottom: unit(@px /@width, rem);
+  margin-bottom: unit(@px /37.5, rem);
 }
 
 .ml(@px) {
-  margin-left: unit(@px /@width, rem);
+  margin-left: unit(@px /37.5, rem);
 }
 
 .pt(@px) {
-  margin-top: unit(@px /@width, rem);
+  padding-top: unit(@px /37.5, rem);
 }
 
 .pr(@px) {
-  padding-right: unit(@px /@width, rem);
+  padding-right: unit(@px /37.5, rem);
 }
 
 .pb(@px) {
-  padding-bottom: unit(@px /@width, rem);
+  padding-bottom: unit(@px /37.5, rem);
 }
 
 .pl(@px) {
-  padding-left: unit(@px /@width, rem);
+  padding-left: unit(@px /37.5, rem);
 }
 
 html, body {
@@ -58,5 +61,5 @@ html, body {
 }
 
 body {
-  .fs(16px);
+  .fs(16);
 }

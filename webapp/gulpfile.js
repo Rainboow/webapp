@@ -50,7 +50,7 @@ gulp.task('js', function () {
 });
 //操作图片
 gulp.task('image', function () {
-    gulp.src(app.srcPath + 'images/**/*')
+    gulp.src(app.srcPath + 'image/**/*')
         .pipe(gulp.dest(app.devPath + 'image'))
         .pipe($.imagemin())
         .pipe(gulp.dest(app.prdPath + 'image'))

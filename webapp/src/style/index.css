@@ -147,15 +147,18 @@ body {
   background-image: url("../image/account.png");
 }
 .position_list {
-  background-color: #fff;
+  margin-top: 0.26666667rem;
+  background: #ffffff;
 }
 .position_list .item {
   border-bottom: 1px solid #f2f2f2;
-  padding: 8px 4px;
 }
 .position_list .logo {
   width: 1.73333333rem;
   height: 1.73333333rem;
   float: left;
-  margin-right: 0.37333333rem;
+  margin-right: 0.21333333rem;
+  margin-bottom: 0.21333333rem;
+  margin-left: 0.13333333rem;
 }
+/*# sourceMappingURL=index.css.map */
