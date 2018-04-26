@@ -10,6 +10,11 @@ angular.module('app').config(['$stateProvider','$urlRouterProvider',function($st
         //页面
         templateUrl:'view/main.html',
         controller:'mainCtrl'
+    }).state('position',{
+        //id展示哪个职位的详情页
+        url:'/position/:id',
+        templateUrl:'view/position.html',
+        controller:'positionCtrl'
     });//若多个路由直接链式配置
     //第二个页面的路由
     //若上面路由无效，则转到main下
@@ -56,7 +61,7 @@ angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
         time: '2018-4-20 9:00'
     }];
     $scope.list2 = [{
-        id: '1',
+        id: '3',
         name: 'web前端',
         imgSrc: '/image/baidu.png',
         companyName: '百度',
@@ -64,7 +69,7 @@ angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
         industry: '互联网',
         time: '2018-4-23 9:00'
     },{
-        id: '2',
+        id: '4',
         name: 'web前端',
         imgSrc: '/image/ali.png',
         companyName: '阿里云',
@@ -72,6 +77,20 @@ angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
         industry: '互联网',
         time: '2018-4-20 9:00'
     }];
+}]);
+'usr strict';
+
+angular.module('app').controller('positionCtrl', ['$scope', function ($scope) {
+
+}]);
+'use strict';
+
+angular.module('app').directive('appCompany',[function () {
+    return{
+        restrict:'A',
+        replace:true,
+        templateUrl:'view/template/company.html'
+    }
 }]);
 'use strict';
 //解析foot.html
@@ -81,6 +100,25 @@ angular.module('app').directive('appFoot', [function () {
         replace: true,
         templateUrl: '/view/template/foot.html'
     }
+}]);
+
+'use strict';
+
+angular.module('app').directive('appHeadBar', [function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        templateUrl: 'view/template/head-bar.html',
+        scope: {
+            text: '@'
+        },
+        link: function ($scope) {
+            $scope.back = function () {
+                //返回
+                window.history.back();
+            }
+        }
+    };
 }]);
 'use strict';
 //html无法解析- 会被解析成大写
@@ -93,6 +131,21 @@ angular.module('app').directive('appHead', [function () {
         //模板的位置
         templateUrl: 'view/template/head.html'
     };
+}]);
+'use strict';
+
+angular.module('app').directive('appPositionInfo', [function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        templateUrl: 'view/template/position-info.html',
+        scope: {
+            isActive: '='
+        },
+        link: function ($scope) {
+            $scope.imagePath = $scope.isActive ? 'image/star-active.png' : 'image/star.png'
+        }
+    }
 }]);
 'use strict';
 

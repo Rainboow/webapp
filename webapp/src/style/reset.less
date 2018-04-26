@@ -57,17 +57,21 @@ a {
 }
 
 body{
-  background: #ccc;
+  background: #f3f3f3;
 }
 
 .fl(@fl:left) {
   float: @fl;
 }
-
+.f-l{
+  float: left;
+}
 .fr(@fr:right) {
   float: @fr;
 }
-
+.f-r{
+  float: right;
+}
 .clear() {
   clear: both;
 }
@@ -89,6 +93,9 @@ body{
 .te-c(){
   text-align: center;
 }
+.t-c{
+  text-align: center;
+}
 .ve-t(){
   vertical-align: top;
 }
@@ -97,4 +104,16 @@ body{
 }
 .ve-b(){
   vertical-align: bottom;
+}
+.p-r{
+  position: relative;
+}
+.p-a{
+  position: absolute;
+}
+.p-f{
+  position: fixed;
+}
+.b-c{
+  background: @defaultColor;
 }

@@ -1,16 +1,8 @@
 <ul class="position_list">
-    <!-- <li class="item">
-         <image class="logo" src="../image/baidu.png" title="百度"></image>
-         <h3 class="title">web前端开发</h3>
-         <p class="text">
-             百度[北京] 互联网 <br>
-             2018-04-23 18:00
-         </p>
-     </li>-->
     <!--ng-repeat 用来表示数组 元素在数组中-->
-    <li class="item" ng-repeat="item in data">
+    <li ui-sref="position({id:item.id})" class="item" ng-repeat="item in data">
         <img class="logo" ng-src="{{item.imgSrc}}" alt="">
-        <h3 class="title" ng-bind="item.name">web前端开发</h3>
+        <h3 class="title" ng-bind="item.name"></h3>
         <p class="text" ng-bind="item.companyName+'['+ item.city+']'+' '+item.industry"></p>
         <p class="time" ng-bind="item.time"></p>
 

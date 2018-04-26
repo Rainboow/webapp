@@ -20,7 +20,7 @@ angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
         time: '2018-4-20 9:00'
     }];
     $scope.list2 = [{
-        id: '1',
+        id: '3',
         name: 'web前端',
         imgSrc: '/image/baidu.png',
         companyName: '百度',
@@ -28,7 +28,7 @@ angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
         industry: '互联网',
         time: '2018-4-23 9:00'
     },{
-        id: '2',
+        id: '4',
         name: 'web前端',
         imgSrc: '/image/ali.png',
         companyName: '阿里云',
