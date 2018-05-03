@@ -100,6 +100,9 @@ body {
 .b-c {
   background: #fff;
 }
+.clear {
+  clear: both;
+}
 html,
 body {
   width: 100%;
@@ -167,14 +170,14 @@ body {
 .foot .icon-account {
   background-image: url("/image/account.png");
 }
-.position_list {
+.position-list {
   background-color: #fff;
 }
-.position_list .item {
+.position-list .item {
   border-bottom: 1px solid #f2f2f2;
   padding: 8px 4px;
 }
-.position_list .logo {
+.position-list .logo {
   width: 1.73333333rem;
   height: 1.73333333rem;
   float: left;
@@ -201,8 +204,8 @@ body {
   border-bottom: 1px solid #f3f3f3;
 }
 .position-desc pre {
+  margin: 8px 0 0 10px;
   font-family: Arial;
-  margin-left: 10px;
   text-align: left;
 }
 .position-info {
@@ -222,7 +225,7 @@ body {
   top: 35px;
 }
 .company {
-  padding: 20px 15px 13px 15px;
+  padding: 10px 15px 1px 85px;
   border-top: 1px solid #f3f3f3;
 }
 .company img {
@@ -232,6 +235,38 @@ body {
 }
 .company p {
   padding: 5px 0 5px 90px;
+}
+.position-class {
+  background-color: #fff;
+  border-top: 1px solid #f3f3f3;
+  padding: 13px 9px 5px 9px;
+}
+.position-class h5 {
+  margin-bottom: 35px;
+  font-size: 0.48rem;
+}
+.position-class button {
+  background-color: gold;
+  border-radius: 20px;
+  padding: 8px 20px;
+  margin-right: 11px;
+  font-size: 0.37333333rem;
+}
+.position-class button.active {
+  background-color: aqua;
+  color: #fff;
+}
+.position-class ul {
+  border-top: 1px solid #f3f3f3;
+  margin: 5px 0 0 0;
+}
+.position-class ul p {
+  margin: 10px 0 5px 0;
+}
+.position-class ul span {
+  color: red;
+  right: 10px;
+  top: 20px;
 }
 body {
   font-size: 0.42666667rem;

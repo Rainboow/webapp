@@ -1,11 +1,11 @@
-<ul class="position_list">
+<ul class="position-list">
     <!--ng-repeat 用来表示数组 元素在数组中-->
-    <li ui-sref="position({id:item.id})" class="item" ng-repeat="item in data">
-        <img class="logo" ng-src="{{item.imgSrc}}" alt="">
+    <li ui-sref="position({id:item.id})" class="item p-r" ng-repeat="item in data">
+        <img class="f-l logo" ng-src="{{item.imageUrl}}" alt="">
         <h3 class="title" ng-bind="item.name"></h3>
-        <p class="text" ng-bind="item.companyName+'['+ item.city+']'+' '+item.industry"></p>
-        <p class="time" ng-bind="item.time"></p>
-
+        <p class="text" ng-bind="item.companyName+'['+item.cityName+']'+' '+item.industryName +' '+item.scaleName"></p>
+        <p class="text" ng-bind="item.date"></p>
+        <div class="clear"></div>
     </li>
 
 </ul>

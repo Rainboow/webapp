@@ -3,21 +3,24 @@
 angular.module('app', ['ui.router']);
 'use strict';
 
-angular.module('app').config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider ){
+angular.module('app').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     //声明第一个页面的路由
-    $stateProvider.state('main',{
-        url:'/main',
+    $stateProvider.state('main', {
+        url: '/main',
         //页面
-        templateUrl:'view/main.html',
-        controller:'mainCtrl'
-    }).state('position',{
+        templateUrl: 'view/main.html',
+        controller: 'mainCtrl'
+    }).state('position', {
         //id展示哪个职位的详情页
-        url:'/position/:id',
-        templateUrl:'view/position.html',
-        controller:'positionCtrl'
-    });//若多个路由直接链式配置
-    //第二个页面的路由
-    //若上面路由无效，则转到main下
+        url: '/position/:id',
+        templateUrl: 'view/position.html',
+        controller: 'positionCtrl'
+    }).state('company', {
+        //id展示那个公司
+        url: '/company/:id',
+        templateUrl: 'view/company.html',
+        controller: 'companyCtrl'
+    });
     $urlRouterProvider.otherwise('main');
 }]);
 
@@ -41,9 +44,18 @@ angular.module('app').config(['$stateProvider','$urlRouterProvider',function($st
 
 'use strict';
 
-angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
+angular.module('app').controller('companyCtrl', ['$scope', function ($scope) {
+
+}])
+'use strict';
+
+angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
+     $http.get('/data/positionList.json').then(function (resp) {
+         console.log(111);
+         $scope.list = resp.data;
+     });
     //$scope用来双向绑定
-    $scope.list1 = [{
+   /* $scope.list1 = [{
         id: '1',
         name: 'web前端',
         imgSrc: '/image/baidu.png',
@@ -51,7 +63,7 @@ angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
         city: '北京',
         industry: '互联网',
         time: '2018-4-23 9:00'
-    },{
+    }, {
         id: '2',
         name: 'web前端',
         imgSrc: '/image/ali.png',
@@ -60,23 +72,7 @@ angular.module('app').controller('mainCtrl', ['$scope', function ($scope) {
         industry: '互联网',
         time: '2018-4-20 9:00'
     }];
-    $scope.list2 = [{
-        id: '3',
-        name: 'web前端',
-        imgSrc: '/image/baidu.png',
-        companyName: '百度',
-        city: '北京',
-        industry: '互联网',
-        time: '2018-4-23 9:00'
-    },{
-        id: '4',
-        name: 'web前端',
-        imgSrc: '/image/ali.png',
-        companyName: '阿里云',
-        city: '杭州',
-        industry: '互联网',
-        time: '2018-4-20 9:00'
-    }];
+*/
 }]);
 'usr strict';
 
@@ -131,6 +127,15 @@ angular.module('app').directive('appHead', [function () {
         //模板的位置
         templateUrl: 'view/template/head.html'
     };
+}]);
+'use strict';
+
+angular.module('app').directive('appPositionClass', [function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        templateUrl: 'view/template/position-class.html'
+    }
 }]);
 'use strict';
 
