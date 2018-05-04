@@ -3,9 +3,8 @@
     <li ui-sref="position({id:item.id})" class="item p-r" ng-repeat="item in data">
         <img class="f-l logo" ng-src="{{item.imageUrl}}" alt="">
         <h3 class="title" ng-bind="item.name"></h3>
-        <p class="text" ng-bind="item.companyName+'['+item.cityName+']'+' '+item.industryName +' '+item.scaleName"></p>
+        <p class="text" ng-bind="item.companyName+'['+item.cityName+']'+' '+item.industryName "></p>
         <p class="text" ng-bind="item.date"></p>
         <div class="clear"></div>
     </li>
-
 </ul>

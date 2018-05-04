@@ -183,6 +183,9 @@ body {
   float: left;
   margin-right: 0.37333333rem;
 }
+.position-list p {
+  padding-top: 8px;
+}
 .bottom-btn {
   background: aqua;
   left: 0;
