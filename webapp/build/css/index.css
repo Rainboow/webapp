@@ -228,7 +228,7 @@ body {
   top: 35px;
 }
 .company {
-  padding: 10px 15px 1px 85px;
+  padding: 10px 15px 6px 85px;
   border-top: 1px solid #f3f3f3;
 }
 .company img {
@@ -249,10 +249,11 @@ body {
   font-size: 0.48rem;
 }
 .position-class button {
-  background-color: gold;
+  background-color: #c6f1f3;
   border-radius: 20px;
   padding: 8px 20px;
   margin-right: 11px;
+  outline: none;
   font-size: 0.37333333rem;
 }
 .position-class button.active {
