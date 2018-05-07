@@ -44,29 +44,55 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function (
 
 'use strict';
 
-angular.module('app').controller('companyCtrl', ['$scope', function ($scope) {
-
+angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
+    $http.get('/data/company.json?id=' + $state.params.id).then(function (resp) {
+        $scope.company = resp.data;
+    })
 }]);
 'use strict';
 
 angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
      $http.get('/data/positionList.json').then(function (resp) {
-         console.log(resp.data);
          $scope.list = resp.data;
      });
 }]);
 'usr strict';
 
-angular.module('app').controller('positionCtrl', ['$scope', function ($scope) {
+angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', function ($q, $scope, $http, $state) {
+    $scope.isLogin = false;
+
+    function getPosition() {
+        //声明延迟加载对象
+        var def = $q.defer();
+        $http.get('/data/position.json?id=' + $state.params.id).then(function (resp) {
+            $scope.position = resp.data;
+            def.resolve(resp);
+        });
+        //返回promise属性
+        return def.promise;
+    }
+
+    function getCompany(id) {
+        $http.get('/data/company.json?id=' +id).then(function (resp) {
+            $scope.company = resp.data;
+        });
+    }
+
+    getPosition().then(function (obj) {
+        getCompany(obj.companyId);
+    });
 
 }]);
 'use strict';
 
-angular.module('app').directive('appCompany',[function () {
-    return{
-        restrict:'A',
-        replace:true,
-        templateUrl:'view/template/company.html'
+angular.module('app').directive('appCompany', [function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        scope: {
+            com: '='
+        },
+        templateUrl: 'view/template/company.html'
     }
 }]);
 'use strict';
@@ -115,6 +141,9 @@ angular.module('app').directive('appPositionClass', [function () {
     return {
         restrict: 'A',
         replace: true,
+        scope:{
+            com:'='
+        },
         templateUrl: 'view/template/position-class.html'
     }
 }]);
@@ -126,7 +155,9 @@ angular.module('app').directive('appPositionInfo', [function () {
         replace: true,
         templateUrl: 'view/template/position-info.html',
         scope: {
-            isActive: '='
+            isActive: '=',
+            isLogin:'=',
+            pos:'='
         },
         link: function ($scope) {
             $scope.imagePath = $scope.isActive ? 'image/star-active.png' : 'image/star.png'
