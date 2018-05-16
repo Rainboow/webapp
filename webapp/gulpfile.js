@@ -32,6 +32,7 @@ gulp.task('json', function () {
 //操作less(css)
 gulp.task('less', function () {
     gulp.src('src/style/index.less')
+        .pipe($.plumber())
         .pipe($.less())
         .pipe(gulp.dest(app.devPath + 'css'))
         .pipe($.cssmin())
@@ -42,6 +43,7 @@ gulp.task('less', function () {
 //操作js
 gulp.task('js', function () {
     gulp.src(app.srcPath + 'script/**/*.js')
+        .pipe($.plumber())
         .pipe($.concat('index.js'))
         .pipe(gulp.dest(app.devPath + 'js'))
         .pipe($.uglify())

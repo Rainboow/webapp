@@ -17,6 +17,11 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function (
         url: '/company/:id',
         templateUrl: 'view/company.html',
         controller: 'companyCtrl'
+    }).state('search',{
+        //搜索页
+        url:'/search',
+        templateUrl:'view/search.html',
+        controller:'searchCtrl'
     });
     $urlRouterProvider.otherwise('main');
 }]);

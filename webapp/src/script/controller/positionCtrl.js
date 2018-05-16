@@ -1,6 +1,8 @@
 'usr strict';
 
-angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', function ($q, $scope, $http, $state) {
+angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', 'cache', function ($q, $scope, $http, $state, cache) {
+    //cache.put('to','want');
+    //cache.remove('to');
     $scope.isLogin = false;
 
     function getPosition() {
@@ -15,7 +17,7 @@ angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$sta
     }
 
     function getCompany(id) {
-        $http.get('/data/company.json?id=' +id).then(function (resp) {
+        $http.get('/data/company.json?id=' + id).then(function (resp) {
             $scope.company = resp.data;
         });
     }
