@@ -1,0 +1,37 @@
+.search-bar {
+  background: @headBgColor;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  .h(40);
+  .lh(40);
+  input {
+    background: @defaultColor;
+    border-radius: 80px;
+    .w(190);
+    .h(25);
+    text-indent: 2em;
+  }
+  button {
+    background-color: @headBgColor;
+    .fs(14);
+    &:first-child {
+      color: @defaultColor;
+    }
+    &:last-child {
+      color: @bottomColor;
+      padding: 0;
+      background-image: url(../image/search.png);
+      background-size: 15px 15px;
+      background-repeat: no-repeat;
+      background-position: 0 4px;
+      padding-left: 20px;
+      margin-left: 10px;
+    }
+  }
+}
+.pos{
+  .mt(80);
+}

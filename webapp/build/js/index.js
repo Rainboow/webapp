@@ -49,6 +49,89 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function (
 
 'use strict';
 
+angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
+    $http.get('/data/company.json?id=' + $state.params.id).then(function (resp) {
+        $scope.company = resp.data;
+    })
+}]);
+'use strict';
+
+angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
+     $http.get('/data/positionList.json').then(function (resp) {
+         $scope.list = resp.data;
+     });
+}]);
+'usr strict';
+
+angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', 'cache', function ($q, $scope, $http, $state, cache) {
+    //cache.put('to','want');
+    //cache.remove('to');
+    $scope.isLogin = false;
+
+    function getPosition() {
+        //声明延迟加载对象
+        var def = $q.defer();
+        $http.get('/data/position.json?id=' + $state.params.id).then(function (resp) {
+            $scope.position = resp.data;
+            def.resolve(resp);
+        });
+        //返回promise属性
+        return def.promise;
+    }
+
+    function getCompany(id) {
+        $http.get('/data/company.json?id=' + id).then(function (resp) {
+            $scope.company = resp.data;
+        });
+    }
+
+    getPosition().then(function (obj) {
+        getCompany(obj.companyId);
+    });
+
+}]);
+'use strict';
+
+angular.module('app').controller('searchCtrl', ['$scope', '$http', function ($scope, $http) {
+    $http.get('data/positionList.json').then(function (resp) {
+        $scope.positionList = resp.data;
+    })
+}]);
+'use strict';
+
+angular.module('app')
+//使用cache服务
+/*.service('cache', ['$cookies', function ($cookies) {
+this.put = function (key, value) {
+    $cookies.put(key, value);
+};
+this.get = function (key) {
+    return $cookies.get(key);
+};
+this.remove = function (key) {
+    $cookies.remove(key);
+}
+}]);*/
+
+//使用工厂 (可以在内部声明私有属性而使用service就不可以)
+.factory('cache', ['$cookies', function ($cookies) {
+    return {
+        put: function (key, value) {
+            $cookies.put(key, value)
+        },
+        get : function (key) {
+            return $cookies.get(key);
+        },
+        remove : function (key) {
+            $cookies.remove(key);
+        }
+    }
+}]);
+
+
+
+'use strict';
+
 angular.module('app').directive('appCompany', [function () {
     return {
         restrict: 'A',
@@ -153,81 +236,18 @@ angular.module('app').directive('appPositionList', [function () {
 
 'use strict';
 
-angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
-    $http.get('/data/company.json?id=' + $state.params.id).then(function (resp) {
-        $scope.company = resp.data;
-    })
-}]);
-'use strict';
-
-angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
-     $http.get('/data/positionList.json').then(function (resp) {
-         $scope.list = resp.data;
-     });
-}]);
-'usr strict';
-
-angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', 'cache', function ($q, $scope, $http, $state, cache) {
-    //cache.put('to','want');
-    //cache.remove('to');
-    $scope.isLogin = false;
-
-    function getPosition() {
-        //声明延迟加载对象
-        var def = $q.defer();
-        $http.get('/data/position.json?id=' + $state.params.id).then(function (resp) {
-            $scope.position = resp.data;
-            def.resolve(resp);
-        });
-        //返回promise属性
-        return def.promise;
-    }
-
-    function getCompany(id) {
-        $http.get('/data/company.json?id=' + id).then(function (resp) {
-            $scope.company = resp.data;
-        });
-    }
-
-    getPosition().then(function (obj) {
-        getCompany(obj.companyId);
-    });
-
-}]);
-'use strict';
-
-angular.module('app').controller('searchCtrl', ['$scope', '$http', function ($scope, $http) {
-
-}]);
-'use strict';
-
-angular.module('app')
-//使用cache服务
-/*.service('cache', ['$cookies', function ($cookies) {
-this.put = function (key, value) {
-    $cookies.put(key, value);
-};
-this.get = function (key) {
-    return $cookies.get(key);
-};
-this.remove = function (key) {
-    $cookies.remove(key);
-}
-}]);*/
-
-//使用工厂 (可以在内部声明私有属性而使用service就不可以)
-.factory('cache', ['$cookies', function ($cookies) {
+angular.module('app').directive('appSheet', [function () {
     return {
-        put: function (key, value) {
-            $cookies.put(key, value)
-        },
-        get : function (key) {
-            return $cookies.get(key);
-        },
-        remove : function (key) {
-            $cookies.remove(key);
-        }
+        restrict: 'A',
+        replace: true,
+        templateUrl: 'view/template/sheet.html'
     }
 }]);
-
-
+'use strict';
+angular.module('app').directive('appTab',[function () {
+    return{
+        restrict:'A',
+        replace:true,
+        templateUrl:'view/template/tab.html'
+    }
+}]);
