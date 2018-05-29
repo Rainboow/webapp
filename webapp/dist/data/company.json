@@ -1,7 +1,7 @@
 {
     "id": "c1",
-    "imageUrl": "/image/baidu.png",
-    "name": "百度",
+    "imageUrl": "/image/company-1.png",
+    "name": "慕课网",
     "industry": "移动互联网",
     "state": "A轮",
     "people": "50-150人",
@@ -11,7 +11,7 @@
       "positionList": [{
         "id": "p1",
         "name": "IOS前端工程师",
-        "createdDate": "2016-04-16 23:30",
+        "createdDate": "2018-04-16 23:30",
         "salary": "15k-25k"
       }]
     }, {
@@ -20,7 +20,7 @@
       "positionList": [{
         "id": "y1",
         "name": "运营总监",
-        "createdDate": "2016-04-10 13:30",
+        "createdDate": "2018-04-10 13:30",
         "salary": "25k以上"
       }]
     }]

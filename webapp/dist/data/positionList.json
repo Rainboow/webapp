@@ -16,15 +16,15 @@
     "education": "专科",
     "benefit": "成长空间大",
     "description": "岗位职责：\n1.销售产品；...",
-    "date": "2016-06-01 11:05"
+    "date": "2018-06-01 11:05"
   }, {
     "id": "p4",
-    "imageUrl": "/image/ali.png",
+    "imageUrl": "/image/baidu.png",
     "job": "产品经理",
     "companyId": "c3",
-    "companyName": "阿里云",
+    "companyName": "百度",
     "cityId": "c3",
-    "cityName": "杭州",
+    "cityName": "广州",
     "scaleId": "s4",
     "scaleName": "500人以上",
     "industryId": "i1",
@@ -35,7 +35,7 @@
     "education": "本科",
     "benefit": "公司氛围好",
     "description": "岗位职责：\n1.制定运营可行的方案；...",
-    "date": "2016-05-01 11:05"
+    "date": "2018-05-01 11:05"
   }, {
     "id": "p1",
     "imageUrl": "/image/company-1.png",
@@ -57,10 +57,10 @@
     "date": "2016-06-01 01:05"
   }, {
     "id": "p2",
-    "imageUrl": "/image/company-2.png",
-    "job": "阿语SEM工程师",
+    "imageUrl": "/image/ali.png",
+    "job": "阿里SEM工程师",
     "companyId": "c2",
-    "companyName": "六一集团有限公司",
+    "companyName": "阿里云",
     "cityId": "c1",
     "cityName": "北京",
     "scaleId": "s3",
@@ -73,6 +73,6 @@
     "education": "本科",
     "benefit": "福利待遇好",
     "description": "岗位要求：\n1.大型公司从事过相关工作；...",
-    "date": "2016-06-01 01:05"
+    "date": "2018-06-01 01:05"
   }
 ]

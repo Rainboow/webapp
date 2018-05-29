@@ -3,6 +3,131 @@
 angular.module('app', ['ui.router','ngCookies']);
 'use strict';
 
+angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
+    $http.get('/data/company.json?id=' + $state.params.id).then(function (resp) {
+        $scope.company = resp.data;
+    })
+}]);
+'use strict';
+
+angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
+    $http.get('/data/positionList.json').then(function (resp) {
+        $scope.list = resp.data;
+    });
+}]);
+'usr strict';
+
+angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', 'cache', function ($q, $scope, $http, $state, cache) {
+    //cache.put('to','want');
+    //cache.remove('to');
+    $scope.isLogin = false;
+
+    function getPosition() {
+        //声明延迟加载对象
+        var def = $q.defer();
+        $http.get('/data/position.json?id=' + $state.params.id).then(function (resp) {
+            $scope.position = resp.data;
+            def.resolve(resp);
+        });
+        //返回promise属性
+        return def.promise;
+    }
+
+    function getCompany(id) {
+        $http.get('/data/company.json?id=' + id).then(function (resp) {
+            $scope.company = resp.data;
+        });
+    }
+
+    getPosition().then(function (obj) {
+        getCompany(obj.companyId);
+    });
+
+}]);
+'use strict';
+
+angular.module('app').controller('searchCtrl', ['$scope', '$http', 'dict', function ($scope, $http, dict) {
+    $scope.name = '';
+    $scope.search = function () {
+        $http.get('data/positionList.json?name=' + $scope.name).then(function (resp) {
+            $scope.positionList = resp.data;
+        });
+    };
+    $scope.search();
+    $scope.sheet = {};
+    $scope.tabList = [{
+        id: 'city',
+        name: '城市'
+    }, {
+        id: 'salary',
+        name: '薪水'
+    }, {
+        id: 'scale',
+        name: '公司规模'
+    }];
+    $scope.filterObj = {};
+    var tabId = ''; //tab页签的id
+    //点击时切换列表
+    $scope.tClick = function (id, name) {
+        //id进行更新
+        tabId = id;
+        // console.log(dict);
+        $scope.sheet.list = dict[id];
+        //列表显示出来
+        $scope.sheet.visible = true;
+    };
+    //点击替换顶菜单
+    $scope.sClick = function (id, name) {
+        //如果有id，下拉菜单时可选择的
+        if (id) {
+            angular.forEach($scope.tabList, function (item) {
+                if (item.id === tabId) {
+                    item.name = name;
+                }
+            });
+            $scope.filterObj[tabId + 'Id'] = id;
+        } else {
+            //不选中的时候删除
+            delete $scope.filterObj[tabId + 'Id'];
+            //遍历
+            angular.forEach($scope.tabList, function (item) {
+                if (item.id === tabId) {
+                    switch (item.id) {
+                        case 'city':
+                            item.name = '城市';
+                            break;
+                        case 'salary':
+                            item.name = '薪水';
+                            break;
+                        case 'scale':
+                            item.name = '公司规模';
+                            break;
+                        default:
+                    }
+                }
+            });
+        }
+    }
+
+}]);
+'use strict';
+//value定义一个全局变量
+//传入顺序需要保持一致
+angular.module('app').value('dict', {}).run(['dict', '$http', function (dict, $http) {
+    $http.get('data/city.json').then(function (resp) {
+        dict.city = resp.data;
+    });
+    $http.get('data/salary.json').then(function (resp) {
+        dict.salary = resp.data;
+    });
+    $http.get('data/scale.json').then(function (resp) {
+        dict.scale = resp.data;
+    });
+
+}]);
+
+'use strict';
+
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     //声明第一个页面的路由
     $stateProvider.state('main', {
@@ -44,89 +169,6 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function (
 
 
 
-
-
-
-'use strict';
-
-angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
-    $http.get('/data/company.json?id=' + $state.params.id).then(function (resp) {
-        $scope.company = resp.data;
-    })
-}]);
-'use strict';
-
-angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
-     $http.get('/data/positionList.json').then(function (resp) {
-         $scope.list = resp.data;
-     });
-}]);
-'usr strict';
-
-angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', 'cache', function ($q, $scope, $http, $state, cache) {
-    //cache.put('to','want');
-    //cache.remove('to');
-    $scope.isLogin = false;
-
-    function getPosition() {
-        //声明延迟加载对象
-        var def = $q.defer();
-        $http.get('/data/position.json?id=' + $state.params.id).then(function (resp) {
-            $scope.position = resp.data;
-            def.resolve(resp);
-        });
-        //返回promise属性
-        return def.promise;
-    }
-
-    function getCompany(id) {
-        $http.get('/data/company.json?id=' + id).then(function (resp) {
-            $scope.company = resp.data;
-        });
-    }
-
-    getPosition().then(function (obj) {
-        getCompany(obj.companyId);
-    });
-
-}]);
-'use strict';
-
-angular.module('app').controller('searchCtrl', ['$scope', '$http', function ($scope, $http) {
-    $http.get('data/positionList.json').then(function (resp) {
-        $scope.positionList = resp.data;
-    })
-}]);
-'use strict';
-
-angular.module('app')
-//使用cache服务
-/*.service('cache', ['$cookies', function ($cookies) {
-this.put = function (key, value) {
-    $cookies.put(key, value);
-};
-this.get = function (key) {
-    return $cookies.get(key);
-};
-this.remove = function (key) {
-    $cookies.remove(key);
-}
-}]);*/
-
-//使用工厂 (可以在内部声明私有属性而使用service就不可以)
-.factory('cache', ['$cookies', function ($cookies) {
-    return {
-        put: function (key, value) {
-            $cookies.put(key, value)
-        },
-        get : function (key) {
-            return $cookies.get(key);
-        },
-        remove : function (key) {
-            $cookies.remove(key);
-        }
-    }
-}]);
 
 
 
@@ -227,9 +269,10 @@ angular.module('app').directive('appPositionList', [function () {
         restrict: 'A',
         replace: true,
         templateUrl: 'view/template/positionList.html',
-        scope:{
+        scope: {
             //data的scope共享
-            data:'='
+            data: '=',
+            filterObj: '='
         }
     };
 }]);
@@ -240,14 +283,86 @@ angular.module('app').directive('appSheet', [function () {
     return {
         restrict: 'A',
         replace: true,
+        scope:{
+            list:'=',
+            visible:'=',
+            //select作为回调函数
+            select:'&'
+        },
         templateUrl: 'view/template/sheet.html'
     }
 }]);
 'use strict';
-angular.module('app').directive('appTab',[function () {
-    return{
-        restrict:'A',
-        replace:true,
-        templateUrl:'view/template/tab.html'
+angular.module('app').directive('appTab', [function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        scope: {
+            list: '=',
+            tabClick: '&'
+        },
+        templateUrl: 'view/template/tab.html',
+        link: function ($scope) {
+            $scope.click = function (tab) {
+                $scope.selectId = tab.id;
+                //传给父级
+                $scope.tabClick(tab);
+            }
+        }
     }
+}]);
+'use strict';
+
+angular.module('app')
+//使用cache服务
+/*.service('cache', ['$cookies', function ($cookies) {
+this.put = function (key, value) {
+    $cookies.put(key, value);
+};
+this.get = function (key) {
+    return $cookies.get(key);
+};
+this.remove = function (key) {
+    $cookies.remove(key);
+}
+}]);*/
+
+//使用工厂 (可以在内部声明私有属性而使用service就不可以)
+.factory('cache', ['$cookies', function ($cookies) {
+    return {
+        put: function (key, value) {
+            $cookies.put(key, value)
+        },
+        get : function (key) {
+            return $cookies.get(key);
+        },
+        remove : function (key) {
+            $cookies.remove(key);
+        }
+    }
+}]);
+
+
+
+'use strict';
+//过滤数组
+angular.module('app').filter('filterByObj', [function () {
+    //接受的是一个数组和对象
+    return function (list, obj) {
+        var result = [];
+        var isEqual = true; //默认相等
+        angular.forEach(list, function (item) {
+            //遍历过滤对象
+            for (var e in obj) {
+                //同样属性值是否相等
+                if (item[e] !== obj[e]) {
+                    isEqual = false;
+                }
+            }
+            if (isEqual) {
+                result.push(item);
+            }
+        });
+        return result;
+    };
 }]);

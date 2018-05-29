@@ -5,9 +5,10 @@ angular.module('app').directive('appPositionList', [function () {
         restrict: 'A',
         replace: true,
         templateUrl: 'view/template/positionList.html',
-        scope:{
+        scope: {
             //data的scope共享
-            data:'='
+            data: '=',
+            filterObj: '='
         }
     };
 }]);

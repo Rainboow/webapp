@@ -210,6 +210,7 @@ body {
   margin: 8px 0 0 10px;
   font-family: Arial;
   text-align: left;
+  padding-bottom: 14px;
 }
 .position-info {
   padding: 26px 10px 18px 10px;
@@ -306,7 +307,10 @@ body {
   margin-left: 10px;
 }
 .pos {
-  margin-top: 2.13333333rem;
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin-top: 2.18666667rem;
 }
 .tab {
   background: #f7f7f7;
@@ -328,6 +332,44 @@ body {
 }
 .tab li.active {
   border-bottom: 2px solid aqua;
+}
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 99;
+}
+.sheet .wrap {
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 100;
+}
+.sheet .wrap li,
+.sheet .wrap button {
+  background: #f1f2f3;
+  height: 1.33333333rem;
+  line-height: 1.33333333rem;
+  width: 100%;
+  display: block;
+  color: #1063e5;
+  border-bottom: 1px solid #d4d4d4;
+  font-size: 0.42666667rem;
+}
+.sheet .wrap ul {
+  margin: 8px 0;
+  border-radius: 6px;
+  overflow: hidden;
+  max-height: 500px;
+}
+.sheet .wrap button {
+  margin-top: 8px;
+  border-radius: 6px;
+  outline: none;
 }
 body {
   font-size: 0.42666667rem;
