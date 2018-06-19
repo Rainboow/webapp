@@ -2,6 +2,93 @@
 //创建模块 多个模块，隔开
 angular.module('app', ['ui.router','ngCookies']);
 'use strict';
+//value定义一个全局变量
+//传入顺序需要保持一致
+angular.module('app').value('dict', {}).run(['dict', '$http', function (dict, $http) {
+    $http.get('data/city.json').then(function (resp) {
+        dict.city = resp.data;
+    });
+    $http.get('data/salary.json').then(function (resp) {
+        dict.salary = resp.data;
+    });
+    $http.get('data/scale.json').then(function (resp) {
+        dict.scale = resp.data;
+    });
+
+}]);
+
+'use strict';
+
+angular.module('app').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    //声明第一个页面的路由
+    $stateProvider.state('main', {
+        url: '/main',
+        //页面
+        templateUrl: 'view/main.html',
+        controller: 'mainCtrl'
+    }).state('position', {
+        //id展示哪个职位的详情页
+        url: '/position/:id',
+        templateUrl: 'view/position.html',
+        controller: 'positionCtrl'
+    }).state('company', {
+        //id展示那个公司
+        url: '/company/:id',
+        templateUrl: 'view/company.html',
+        controller: 'companyCtrl'
+    }).state('search',{
+        //搜索页
+        url:'/search',
+        templateUrl:'view/search.html',
+        controller:'searchCtrl'
+    }).state('login',{
+        //搜索页
+        url:'/login',
+        templateUrl:'view/login.html',
+        controller:'loginCtrl'
+    }).state('register',{
+        //搜索页
+        url:'/register',
+        templateUrl:'view/register.html',
+        controller:'registerCtrl'
+    }).state('me',{
+        //搜索页
+        url:'/me',
+        templateUrl:'view/me.html',
+        controller:'meCtrl'
+    }).state('favorite',{
+        //搜索页
+        url:'/favorite',
+        templateUrl:'view/favorite.html',
+        controller:'favoriteCtrl'
+    }).state('post',{
+        //搜索页
+        url:'/post',
+        templateUrl:'view/post.html',
+        controller:'postCtrl'
+    });
+    $urlRouterProvider.otherwise('main');
+}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
 
 angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
     $http.get('/data/company.json?id=' + $state.params.id).then(function (resp) {
@@ -10,10 +97,25 @@ angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', fu
 }]);
 'use strict';
 
+angular.module('app').controller('favoriteCtrl', ['$http', '$scope', function ($http, $scope) {
+
+}]);
+'use strict';
+
+angular.module('app').controller('loginCtrl',['$http','$scope',function ($http,$scope) {
+
+}]);
+'use strict';
+
 angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
     $http.get('/data/positionList.json').then(function (resp) {
         $scope.list = resp.data;
     });
+}]);
+'use strict';
+
+angular.module('app').controller('meCtrl', ['$http', '$scope', function ($http, $scope) {
+
 }]);
 'usr strict';
 
@@ -42,6 +144,16 @@ angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$sta
     getPosition().then(function (obj) {
         getCompany(obj.companyId);
     });
+
+}]);
+'use strict';
+
+angular.module('app').controller('postCtrl', ['$http', '$scope', function ($http, scope) {
+
+}]);
+'use strict';
+
+angular.module('app').controller('registerCtrl', ['$http', '$scope', function ($http, $scope) {
 
 }]);
 'use strict';
@@ -110,68 +222,6 @@ angular.module('app').controller('searchCtrl', ['$scope', '$http', 'dict', funct
     }
 
 }]);
-'use strict';
-//value定义一个全局变量
-//传入顺序需要保持一致
-angular.module('app').value('dict', {}).run(['dict', '$http', function (dict, $http) {
-    $http.get('data/city.json').then(function (resp) {
-        dict.city = resp.data;
-    });
-    $http.get('data/salary.json').then(function (resp) {
-        dict.salary = resp.data;
-    });
-    $http.get('data/scale.json').then(function (resp) {
-        dict.scale = resp.data;
-    });
-
-}]);
-
-'use strict';
-
-angular.module('app').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    //声明第一个页面的路由
-    $stateProvider.state('main', {
-        url: '/main',
-        //页面
-        templateUrl: 'view/main.html',
-        controller: 'mainCtrl'
-    }).state('position', {
-        //id展示哪个职位的详情页
-        url: '/position/:id',
-        templateUrl: 'view/position.html',
-        controller: 'positionCtrl'
-    }).state('company', {
-        //id展示那个公司
-        url: '/company/:id',
-        templateUrl: 'view/company.html',
-        controller: 'companyCtrl'
-    }).state('search',{
-        //搜索页
-        url:'/search',
-        templateUrl:'view/search.html',
-        controller:'searchCtrl'
-    });
-    $urlRouterProvider.otherwise('main');
-}]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'use strict';
 
 angular.module('app').directive('appCompany', [function () {
@@ -312,6 +362,28 @@ angular.module('app').directive('appTab', [function () {
     }
 }]);
 'use strict';
+//过滤数组
+angular.module('app').filter('filterByObj', [function () {
+    //接受的是一个数组和对象
+    return function (list, obj) {
+        var result = [];
+        var isEqual = true; //默认相等
+        angular.forEach(list, function (item) {
+            //遍历过滤对象
+            for (var e in obj) {
+                //同样属性值是否相等
+                if (item[e] !== obj[e]) {
+                    isEqual = false;
+                }
+            }
+            if (isEqual) {
+                result.push(item);
+            }
+        });
+        return result;
+    };
+}]);
+'use strict';
 
 angular.module('app')
 //使用cache服务
@@ -343,26 +415,3 @@ this.remove = function (key) {
 }]);
 
 
-
-'use strict';
-//过滤数组
-angular.module('app').filter('filterByObj', [function () {
-    //接受的是一个数组和对象
-    return function (list, obj) {
-        var result = [];
-        var isEqual = true; //默认相等
-        angular.forEach(list, function (item) {
-            //遍历过滤对象
-            for (var e in obj) {
-                //同样属性值是否相等
-                if (item[e] !== obj[e]) {
-                    isEqual = false;
-                }
-            }
-            if (isEqual) {
-                result.push(item);
-            }
-        });
-        return result;
-    };
-}]);

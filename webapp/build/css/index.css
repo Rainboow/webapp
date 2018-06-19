@@ -88,6 +88,9 @@ body {
 .t-c {
   text-align: center;
 }
+.v-t {
+  vertical-align: top;
+}
 .p-r {
   position: relative;
 }
@@ -370,6 +373,78 @@ body {
   margin-top: 8px;
   border-radius: 6px;
   outline: none;
+}
+.login {
+  background-image: url(../image/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.login form {
+  margin-top: 6.93333333rem;
+}
+.login form .form-line {
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: content-box;
+  font-size: 0;
+  width: 8rem;
+  height: 1.06666667rem;
+  line-height: 1.06666667rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-align: left;
+}
+.login form .form-line:first-child {
+  border-bottom: 1px solid #fff;
+}
+.login form .form-line span {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 20px 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 1.46666667rem;
+}
+.login form .form-line .account {
+  background-image: url('../image/account2.png');
+}
+.login form .form-line .lock {
+  background-image: url("../image/lock.png");
+}
+.login form input {
+  display: inline-block;
+  font-size: 0.37333333rem;
+  height: 100%;
+  width: 6.53333333rem;
+  padding-left: 0.8rem;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.login form input::-webkit-input-placeholder {
+  color: #fff;
+}
+.login form button {
+  width: 8rem;
+  height: 0.93333333rem;
+  font-size: 0.58666667rem;
+  font-weight: bold;
+}
+.login form button.login-btn {
+  background-color: aqua;
+  color: #fff;
+  margin-top: 75px;
+}
+.login form button.register-btn {
+  margin-top: 20px;
+  background-color: rgba(18, 213, 181, 0.2);
+  color: aqua;
+  border: 1px solid aqua;
 }
 body {
   font-size: 0.42666667rem;

@@ -22,6 +22,31 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function (
         url:'/search',
         templateUrl:'view/search.html',
         controller:'searchCtrl'
+    }).state('login',{
+        //搜索页
+        url:'/login',
+        templateUrl:'view/login.html',
+        controller:'loginCtrl'
+    }).state('register',{
+        //搜索页
+        url:'/register',
+        templateUrl:'view/register.html',
+        controller:'registerCtrl'
+    }).state('me',{
+        //搜索页
+        url:'/me',
+        templateUrl:'view/me.html',
+        controller:'meCtrl'
+    }).state('favorite',{
+        //搜索页
+        url:'/favorite',
+        templateUrl:'view/favorite.html',
+        controller:'favoriteCtrl'
+    }).state('post',{
+        //搜索页
+        url:'/post',
+        templateUrl:'view/post.html',
+        controller:'postCtrl'
     });
     $urlRouterProvider.otherwise('main');
 }]);
