@@ -446,6 +446,131 @@ body {
   color: aqua;
   border: 1px solid aqua;
 }
+.register {
+  background-image: url(../image/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.register form {
+  margin-top: 1.46666667rem;
+}
+.register form .form-line {
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: content-box;
+  font-size: 0;
+  width: 8rem;
+  height: 1.06666667rem;
+  line-height: 1.06666667rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-align: left;
+}
+.register form .form-line:first-child {
+  border-bottom: 1px solid #fff;
+}
+.register form .form-line span {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 20px 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 1.46666667rem;
+}
+.register form .form-line .account {
+  background-image: url('../image/account2.png');
+}
+.register form .form-line .lock {
+  background-image: url("../image/lock.png");
+}
+.register form input {
+  display: inline-block;
+  font-size: 0.37333333rem;
+  height: 100%;
+  width: 6.53333333rem;
+  padding-left: 0.8rem;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.register form input::-webkit-input-placeholder {
+  color: #fff;
+}
+.register form .message-wrap {
+  width: 8rem;
+  margin-top: 1.06666667rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.register form .message-wrap .message-box {
+  width: 5.06666667rem;
+  height: 1.06666667rem;
+  font-size: 0.37333333rem;
+  padding-left: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  color: #fff;
+}
+.register form .message-wrap .message-box::-webkit-input-placeholder {
+  color: #fff;
+}
+.register form .message-wrap .message {
+  font-size: 0.37333333rem;
+  color: aqua;
+  border: 1px solid aqua;
+  padding: 0 8px;
+  margin-top: 0.26666667rem;
+}
+.register form button {
+  width: 8rem;
+  height: 0.93333333rem;
+  font-size: 0.58666667rem;
+  font-weight: bold;
+}
+.register form button.login-btn {
+  background-color: aqua;
+  color: #fff;
+  margin-top: 60px;
+}
+.register form button.register-btn {
+  margin-top: 20px;
+  background-color: rgba(18, 213, 181, 0.2);
+  color: aqua;
+  border: 1px solid aqua;
+}
+.me img {
+  display: block;
+  margin-top: 1.6rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.me .name {
+  margin-top: 0.66666667rem;
+}
+.me .btns {
+  margin-top: 1.06666667rem;
+}
+.me .btns button {
+  background-color: aqua;
+  color: #fff;
+  width: 4rem;
+  height: 2.53333333rem;
+  font-size: 0.42666667rem;
+  margin-left: 0.32rem;
+  margin-right: 0.32rem;
+}
+.me .btns .logout {
+  width: 9.06666667rem;
+  height: 1.06666667rem;
+  margin-top: 0.53333333rem;
+  background-color: red;
+}
 body {
   font-size: 0.42666667rem;
   font-family: Arial;

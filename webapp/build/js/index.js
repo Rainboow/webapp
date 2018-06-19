@@ -90,140 +90,6 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function (
 
 'use strict';
 
-angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
-    $http.get('/data/company.json?id=' + $state.params.id).then(function (resp) {
-        $scope.company = resp.data;
-    })
-}]);
-'use strict';
-
-angular.module('app').controller('favoriteCtrl', ['$http', '$scope', function ($http, $scope) {
-
-}]);
-'use strict';
-
-angular.module('app').controller('loginCtrl',['$http','$scope',function ($http,$scope) {
-
-}]);
-'use strict';
-
-angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
-    $http.get('/data/positionList.json').then(function (resp) {
-        $scope.list = resp.data;
-    });
-}]);
-'use strict';
-
-angular.module('app').controller('meCtrl', ['$http', '$scope', function ($http, $scope) {
-
-}]);
-'usr strict';
-
-angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', 'cache', function ($q, $scope, $http, $state, cache) {
-    //cache.put('to','want');
-    //cache.remove('to');
-    $scope.isLogin = false;
-
-    function getPosition() {
-        //声明延迟加载对象
-        var def = $q.defer();
-        $http.get('/data/position.json?id=' + $state.params.id).then(function (resp) {
-            $scope.position = resp.data;
-            def.resolve(resp);
-        });
-        //返回promise属性
-        return def.promise;
-    }
-
-    function getCompany(id) {
-        $http.get('/data/company.json?id=' + id).then(function (resp) {
-            $scope.company = resp.data;
-        });
-    }
-
-    getPosition().then(function (obj) {
-        getCompany(obj.companyId);
-    });
-
-}]);
-'use strict';
-
-angular.module('app').controller('postCtrl', ['$http', '$scope', function ($http, scope) {
-
-}]);
-'use strict';
-
-angular.module('app').controller('registerCtrl', ['$http', '$scope', function ($http, $scope) {
-
-}]);
-'use strict';
-
-angular.module('app').controller('searchCtrl', ['$scope', '$http', 'dict', function ($scope, $http, dict) {
-    $scope.name = '';
-    $scope.search = function () {
-        $http.get('data/positionList.json?name=' + $scope.name).then(function (resp) {
-            $scope.positionList = resp.data;
-        });
-    };
-    $scope.search();
-    $scope.sheet = {};
-    $scope.tabList = [{
-        id: 'city',
-        name: '城市'
-    }, {
-        id: 'salary',
-        name: '薪水'
-    }, {
-        id: 'scale',
-        name: '公司规模'
-    }];
-    $scope.filterObj = {};
-    var tabId = ''; //tab页签的id
-    //点击时切换列表
-    $scope.tClick = function (id, name) {
-        //id进行更新
-        tabId = id;
-        // console.log(dict);
-        $scope.sheet.list = dict[id];
-        //列表显示出来
-        $scope.sheet.visible = true;
-    };
-    //点击替换顶菜单
-    $scope.sClick = function (id, name) {
-        //如果有id，下拉菜单时可选择的
-        if (id) {
-            angular.forEach($scope.tabList, function (item) {
-                if (item.id === tabId) {
-                    item.name = name;
-                }
-            });
-            $scope.filterObj[tabId + 'Id'] = id;
-        } else {
-            //不选中的时候删除
-            delete $scope.filterObj[tabId + 'Id'];
-            //遍历
-            angular.forEach($scope.tabList, function (item) {
-                if (item.id === tabId) {
-                    switch (item.id) {
-                        case 'city':
-                            item.name = '城市';
-                            break;
-                        case 'salary':
-                            item.name = '薪水';
-                            break;
-                        case 'scale':
-                            item.name = '公司规模';
-                            break;
-                        default:
-                    }
-                }
-            });
-        }
-    }
-
-}]);
-'use strict';
-
 angular.module('app').directive('appCompany', [function () {
     return {
         restrict: 'A',
@@ -360,6 +226,149 @@ angular.module('app').directive('appTab', [function () {
             }
         }
     }
+}]);
+'use strict';
+
+angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
+    $http.get('/data/company.json?id=' + $state.params.id).then(function (resp) {
+        $scope.company = resp.data;
+    })
+}]);
+'use strict';
+
+angular.module('app').controller('favoriteCtrl', ['$http', '$scope', function ($http, $scope) {
+
+}]);
+'use strict';
+
+angular.module('app').controller('loginCtrl',['$http','$scope',function ($http,$scope) {
+
+}]);
+'use strict';
+
+angular.module('app').controller('mainCtrl', ['$http', '$scope', function ($http, $scope) {
+    $http.get('/data/positionList.json').then(function (resp) {
+        $scope.list = resp.data;
+    });
+}]);
+'use strict';
+
+angular.module('app').controller('meCtrl', ['$http', '$scope', function ($http, $scope) {
+
+}]);
+'usr strict';
+
+angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$state', 'cache', function ($q, $scope, $http, $state, cache) {
+    //cache.put('to','want');
+    //cache.remove('to');
+    $scope.isLogin = false;
+
+    function getPosition() {
+        //声明延迟加载对象
+        var def = $q.defer();
+        $http.get('/data/position.json?id=' + $state.params.id).then(function (resp) {
+            $scope.position = resp.data;
+            def.resolve(resp);
+        });
+        //返回promise属性
+        return def.promise;
+    }
+
+    function getCompany(id) {
+        $http.get('/data/company.json?id=' + id).then(function (resp) {
+            $scope.company = resp.data;
+        });
+    }
+
+    getPosition().then(function (obj) {
+        getCompany(obj.companyId);
+    });
+
+}]);
+'use strict';
+
+angular.module('app').controller('postCtrl', ['$http', '$scope', function ($http, scope) {
+    $scope.tabList = [{
+        id: 'all',
+        name: '全部'
+    }, {
+        id: 'pass',
+        name: '面试邀请'
+    }, {
+        id: 'fall',
+        name: '不合格'
+    }]
+}]);
+'use strict';
+
+angular.module('app').controller('registerCtrl', ['$http', '$scope', function ($http, $scope) {
+
+}]);
+'use strict';
+
+angular.module('app').controller('searchCtrl', ['$scope', '$http', 'dict', function ($scope, $http, dict) {
+    $scope.name = '';
+    $scope.search = function () {
+        $http.get('data/positionList.json?name=' + $scope.name).then(function (resp) {
+            $scope.positionList = resp.data;
+        });
+    };
+    $scope.search();
+    $scope.sheet = {};
+    $scope.tabList = [{
+        id: 'city',
+        name: '城市'
+    }, {
+        id: 'salary',
+        name: '薪水'
+    }, {
+        id: 'scale',
+        name: '公司规模'
+    }];
+    $scope.filterObj = {};
+    var tabId = ''; //tab页签的id
+    //点击时切换列表
+    $scope.tClick = function (id, name) {
+        //id进行更新
+        tabId = id;
+        // console.log(dict);
+        $scope.sheet.list = dict[id];
+        //列表显示出来
+        $scope.sheet.visible = true;
+    };
+    //点击替换顶菜单
+    $scope.sClick = function (id, name) {
+        //如果有id，下拉菜单时可选择的
+        if (id) {
+            angular.forEach($scope.tabList, function (item) {
+                if (item.id === tabId) {
+                    item.name = name;
+                }
+            });
+            $scope.filterObj[tabId + 'Id'] = id;
+        } else {
+            //不选中的时候删除
+            delete $scope.filterObj[tabId + 'Id'];
+            //遍历
+            angular.forEach($scope.tabList, function (item) {
+                if (item.id === tabId) {
+                    switch (item.id) {
+                        case 'city':
+                            item.name = '城市';
+                            break;
+                        case 'salary':
+                            item.name = '薪水';
+                            break;
+                        case 'scale':
+                            item.name = '公司规模';
+                            break;
+                        default:
+                    }
+                }
+            });
+        }
+    }
+
 }]);
 'use strict';
 //过滤数组
